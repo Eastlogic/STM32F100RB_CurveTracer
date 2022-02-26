@@ -16,13 +16,13 @@
 #define FRAME_OUT 	256	  //Максимальное число передаваемых полезных байт данных								
 
 //Коды универсальных команд
-#define CMD_NOP     	0		//Нет операции
-#define CMD_ERR     	1		//Ошибка приема пакета
+#define CMD_NOP     0			//Нет операции
+#define CMD_ERR     1			//Ошибка приема пакета
 
 //Коды ошибок:
-#define ERR_NO 0x00   		//No error
-#define ERR_TX 0x01   		//Rx/Tx error
-#define ERR_PA 0x04   		//Parameters value error
+#define ERR_NO 			0x00  //No error
+#define ERR_TX 			0x01  //Rx/Tx error
+#define ERR_PA 			0x04  //Parameters value error
 
 
 //RX process states:

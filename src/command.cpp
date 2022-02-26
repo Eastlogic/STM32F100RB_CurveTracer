@@ -66,7 +66,6 @@ char Tx_Dat[2*FRAME_OUT];						// Обработанный фрейм к отправке
 extern char Command;								// Код команды на выполнение
 extern StAmpModeRange StAmpMR;			// Step Amp режим Mode/Range
 
-//float f_val;
 
 // -- Функция разбора выполняемых команд -------------------------------------
 void CMD_exec(void)
@@ -84,8 +83,8 @@ switch (Command)
 		// Link Echo - возврат пришедших данных
 		case CMD_LINK_ECHO:	
 		{		
-		Send_WAKE_pckg(CMD_LINK_ECHO, Rx_Nbt, Rx_Dat);			
-		break;
+				Send_WAKE_pckg(CMD_LINK_ECHO, Rx_Nbt, Rx_Dat);			
+				break;
 		}
 
 		// *****************************************************************
@@ -96,15 +95,7 @@ switch (Command)
 				else 						{Led1_OFF;}
 
 				Tx_Dat_raw[1] = CMD_LED_ON_OFF;		// Возврат команды запроса
-/*	
-				Tx_Dat_raw[2] = 0x00;							// Число байт данных ответа
-				Tx_Dat_raw[3] = 0x01;
-				Tx_Dat_raw[4] = ERR_NO;						// Байт данных "нет ошибки"
-			
-				Tx_Dat_raw[5] = CRC_8_Arr(Tx_Dat_raw, 5);				// Последний байт - CRC
-				length = Array_to_wake(Tx_Dat_raw, 6, Tx_Dat);  // Длина сформированного массива
-				Array_to_USART1(Tx_Dat, length);								// Отправка ответа			
-*/
+
 		break;
 		}
 
@@ -116,15 +107,7 @@ switch (Command)
 				else 						{ST_AMP_NEGATIVE;}
 
 				Tx_Dat_raw[1] = CMD_STAMP_POL;		// Возврат команды запроса
-/*	
-				Tx_Dat_raw[2] = 0x00;							// Число байт данных ответа
-				Tx_Dat_raw[3] = 0x01;
-				Tx_Dat_raw[4] = ERR_NO;						// Байт данных "нет ошибки"
-			
-				Tx_Dat_raw[5] = CRC_8_Arr(Tx_Dat_raw, 5);				// Последний байт - CRC
-				length = Array_to_wake(Tx_Dat_raw, 6, Tx_Dat);  // Длина сформированного массива
-				Array_to_USART1(Tx_Dat, length);								// Отправка ответа
-*/
+
 		break;
 		}
 
@@ -176,14 +159,7 @@ switch (Command)
 		case CMD_ERR: 										// Обработка ошибки обмена
     {
 		Tx_Dat_raw[1] = CMD_ERR;
-/*	
-		Tx_Dat_raw[2] = 0x00;							// Число байт данных ответа
-		Tx_Dat_raw[3] = 0x01;				
-		Tx_Dat_raw[4] = ERR_TX;
-		Tx_Dat_raw[5] = CRC_8_Arr(Tx_Dat_raw, 5);				// Последний байт - CRC
-		length = Array_to_wake(Tx_Dat_raw, 6, Tx_Dat);  // Длина сформированного массива
-		Array_to_USART1(Tx_Dat, length);								// Отправка фрейма ответа
-*/
+
 		break;
 		}
 						
