@@ -5,13 +5,15 @@
 #define COMMAND_H_
 
 //Коды специальных команд приложения
-#define CMD_LINK_ECHO					0x0A			// Команда проверки связи
-#define CMD_LED_ON_OFF				0x0B			// Debug command
+#define CMD_LINK_ECHO			0x0A			// Команда проверки связи
+#define CMD_LED_ON_OFF			0x0B			// Debug command
 
 // -----------------------------------------------------------------------
-#define CMD_STAMP_POL					0x0C			// Step Amp polarity select
+#define CMD_STAMP_POL			0x0C			// Step Amp polarity select
 #define CMD_STAMP_MODE_RANGE	0x0D			// Step Amp mode (current/voltage)
 																				// and range select
+
+#define CMD_STAMP_SET_OUT		0x0E			// Step Amp set out signal
 
 
 //#define CMD_SET_GAIN	0x0B			// Команда установки коэффициента усиления PGA1, PGA2

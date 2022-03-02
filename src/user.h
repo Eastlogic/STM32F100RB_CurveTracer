@@ -64,123 +64,123 @@ StAmpModeRange;
 #define ST_AMP_NEGATIVE				GPIO_SetBits(K1_GPIO, K1_GPIO_Pin);
 
 #define ST_AMP_I_RANGE1				GPIO_ResetBits(K3_GPIO, K3_GPIO_Pin);\
-															GPIO_ResetBits(K4_GPIO, K4_GPIO_Pin);\
-															GPIO_ResetBits(K5_GPIO, K5_GPIO_Pin);\
-															GPIO_ResetBits(K6_GPIO, K6_GPIO_Pin);\
-															GPIO_SetBits(K2_GPIO, K2_GPIO_Pin);\
-															StAmpMR = ModeI_Range1;
+									GPIO_ResetBits(K4_GPIO, K4_GPIO_Pin);\
+									GPIO_ResetBits(K5_GPIO, K5_GPIO_Pin);\
+									GPIO_ResetBits(K6_GPIO, K6_GPIO_Pin);\
+									GPIO_SetBits(K2_GPIO, K2_GPIO_Pin);\
+									StAmpMR = ModeI_Range1;
 
 #define ST_AMP_I_RANGE2				GPIO_ResetBits(K2_GPIO, K2_GPIO_Pin);\
-															GPIO_ResetBits(K3_GPIO, K3_GPIO_Pin);\
-															GPIO_ResetBits(K4_GPIO, K4_GPIO_Pin);\
-															GPIO_ResetBits(K5_GPIO, K5_GPIO_Pin);\
-															GPIO_ResetBits(K6_GPIO, K6_GPIO_Pin);\
-															StAmpMR = ModeI_Range2;
+									GPIO_ResetBits(K3_GPIO, K3_GPIO_Pin);\
+									GPIO_ResetBits(K4_GPIO, K4_GPIO_Pin);\
+									GPIO_ResetBits(K5_GPIO, K5_GPIO_Pin);\
+									GPIO_ResetBits(K6_GPIO, K6_GPIO_Pin);\
+									StAmpMR = ModeI_Range2;
 
 #define ST_AMP_I_RANGE3				GPIO_ResetBits(K3_GPIO, K3_GPIO_Pin);\
-															GPIO_ResetBits(K4_GPIO, K4_GPIO_Pin);\
-															GPIO_ResetBits(K6_GPIO, K6_GPIO_Pin);\
-															GPIO_SetBits(K2_GPIO, K2_GPIO_Pin);\
-															GPIO_SetBits(K5_GPIO, K5_GPIO_Pin);\
-															StAmpMR = ModeI_Range3;
+									GPIO_ResetBits(K4_GPIO, K4_GPIO_Pin);\
+									GPIO_ResetBits(K6_GPIO, K6_GPIO_Pin);\
+									GPIO_SetBits(K2_GPIO, K2_GPIO_Pin);\
+									GPIO_SetBits(K5_GPIO, K5_GPIO_Pin);\
+									StAmpMR = ModeI_Range3;
 
 #define ST_AMP_I_RANGE4				GPIO_ResetBits(K2_GPIO, K2_GPIO_Pin);\
-															GPIO_ResetBits(K3_GPIO, K3_GPIO_Pin);\
-															GPIO_ResetBits(K4_GPIO, K4_GPIO_Pin);\
-															GPIO_ResetBits(K6_GPIO, K6_GPIO_Pin);\
-															GPIO_SetBits(K5_GPIO, K5_GPIO_Pin);\
-															StAmpMR = ModeI_Range4;
+									GPIO_ResetBits(K3_GPIO, K3_GPIO_Pin);\
+									GPIO_ResetBits(K4_GPIO, K4_GPIO_Pin);\
+									GPIO_ResetBits(K6_GPIO, K6_GPIO_Pin);\
+									GPIO_SetBits(K5_GPIO, K5_GPIO_Pin);\
+									StAmpMR = ModeI_Range4;
 
 #define ST_AMP_I_RANGE5				GPIO_ResetBits(K3_GPIO, K3_GPIO_Pin);\
-															GPIO_ResetBits(K5_GPIO, K5_GPIO_Pin);\
-															GPIO_ResetBits(K6_GPIO, K6_GPIO_Pin);\
-															GPIO_SetBits(K2_GPIO, K2_GPIO_Pin);\
-															GPIO_SetBits(K4_GPIO, K4_GPIO_Pin);\
-															StAmpMR = ModeI_Range5;
+									GPIO_ResetBits(K5_GPIO, K5_GPIO_Pin);\
+									GPIO_ResetBits(K6_GPIO, K6_GPIO_Pin);\
+									GPIO_SetBits(K2_GPIO, K2_GPIO_Pin);\
+									GPIO_SetBits(K4_GPIO, K4_GPIO_Pin);\
+									StAmpMR = ModeI_Range5;
 
 #define ST_AMP_I_RANGE6				GPIO_ResetBits(K2_GPIO, K2_GPIO_Pin);\
-															GPIO_ResetBits(K3_GPIO, K3_GPIO_Pin);\
-															GPIO_ResetBits(K5_GPIO, K5_GPIO_Pin);\
-															GPIO_ResetBits(K6_GPIO, K6_GPIO_Pin);\
-															GPIO_SetBits(K4_GPIO, K4_GPIO_Pin);\
-															StAmpMR = ModeI_Range6;
+									GPIO_ResetBits(K3_GPIO, K3_GPIO_Pin);\
+									GPIO_ResetBits(K5_GPIO, K5_GPIO_Pin);\
+									GPIO_ResetBits(K6_GPIO, K6_GPIO_Pin);\
+									GPIO_SetBits(K4_GPIO, K4_GPIO_Pin);\
+									StAmpMR = ModeI_Range6;
 
 #define ST_AMP_I_RANGE7				GPIO_ResetBits(K3_GPIO, K3_GPIO_Pin);\
-															GPIO_ResetBits(K5_GPIO, K5_GPIO_Pin);\
-															GPIO_SetBits(K2_GPIO, K2_GPIO_Pin);\
-															GPIO_SetBits(K4_GPIO, K4_GPIO_Pin);\
-															GPIO_SetBits(K6_GPIO, K6_GPIO_Pin);\
-															StAmpMR = ModeI_Range7;
+									GPIO_ResetBits(K5_GPIO, K5_GPIO_Pin);\
+									GPIO_SetBits(K2_GPIO, K2_GPIO_Pin);\
+									GPIO_SetBits(K4_GPIO, K4_GPIO_Pin);\
+									GPIO_SetBits(K6_GPIO, K6_GPIO_Pin);\
+									StAmpMR = ModeI_Range7;
 
 #define ST_AMP_I_RANGE8				GPIO_ResetBits(K2_GPIO, K2_GPIO_Pin);\
-															GPIO_ResetBits(K3_GPIO, K3_GPIO_Pin);\
-															GPIO_ResetBits(K5_GPIO, K5_GPIO_Pin);\
-															GPIO_SetBits(K4_GPIO, K4_GPIO_Pin);\
-															GPIO_SetBits(K6_GPIO, K6_GPIO_Pin);\
-															StAmpMR = ModeI_Range8;
+									GPIO_ResetBits(K3_GPIO, K3_GPIO_Pin);\
+									GPIO_ResetBits(K5_GPIO, K5_GPIO_Pin);\
+									GPIO_SetBits(K4_GPIO, K4_GPIO_Pin);\
+									GPIO_SetBits(K6_GPIO, K6_GPIO_Pin);\
+									StAmpMR = ModeI_Range8;
 
 #define ST_AMP_V_RANGE1				GPIO_ResetBits(K4_GPIO, K4_GPIO_Pin);\
-															GPIO_ResetBits(K5_GPIO, K5_GPIO_Pin);\
-															GPIO_ResetBits(K6_GPIO, K6_GPIO_Pin);\
-															GPIO_SetBits(K2_GPIO, K2_GPIO_Pin);\
-															GPIO_SetBits(K3_GPIO, K3_GPIO_Pin);\
-															StAmpMR = ModeV_Range1;
+									GPIO_ResetBits(K5_GPIO, K5_GPIO_Pin);\
+									GPIO_ResetBits(K6_GPIO, K6_GPIO_Pin);\
+									GPIO_SetBits(K2_GPIO, K2_GPIO_Pin);\
+									GPIO_SetBits(K3_GPIO, K3_GPIO_Pin);\
+									StAmpMR = ModeV_Range1;
 
 #define ST_AMP_V_RANGE2				GPIO_ResetBits(K2_GPIO, K2_GPIO_Pin);\
-															GPIO_ResetBits(K4_GPIO, K4_GPIO_Pin);\
-															GPIO_ResetBits(K5_GPIO, K5_GPIO_Pin);\
-															GPIO_ResetBits(K6_GPIO, K6_GPIO_Pin);\
-															GPIO_SetBits(K3_GPIO, K3_GPIO_Pin);\
-															StAmpMR = ModeV_Range2;
+									GPIO_ResetBits(K4_GPIO, K4_GPIO_Pin);\
+									GPIO_ResetBits(K5_GPIO, K5_GPIO_Pin);\
+									GPIO_ResetBits(K6_GPIO, K6_GPIO_Pin);\
+									GPIO_SetBits(K3_GPIO, K3_GPIO_Pin);\
+									StAmpMR = ModeV_Range2;
 
 #define ST_AMP_V_RANGE3				GPIO_ResetBits(K4_GPIO, K4_GPIO_Pin);\
-															GPIO_ResetBits(K6_GPIO, K6_GPIO_Pin);\
-															GPIO_SetBits(K2_GPIO, K2_GPIO_Pin);\
-															GPIO_SetBits(K3_GPIO, K3_GPIO_Pin);\
-															GPIO_SetBits(K5_GPIO, K5_GPIO_Pin);\
-															StAmpMR = ModeV_Range3;
+									GPIO_ResetBits(K6_GPIO, K6_GPIO_Pin);\
+									GPIO_SetBits(K2_GPIO, K2_GPIO_Pin);\
+									GPIO_SetBits(K3_GPIO, K3_GPIO_Pin);\
+									GPIO_SetBits(K5_GPIO, K5_GPIO_Pin);\
+									StAmpMR = ModeV_Range3;
 
 #define ST_AMP_V_RANGE4				GPIO_ResetBits(K2_GPIO, K2_GPIO_Pin);\
-															GPIO_ResetBits(K4_GPIO, K4_GPIO_Pin);\
-															GPIO_ResetBits(K6_GPIO, K6_GPIO_Pin);\
-															GPIO_SetBits(K3_GPIO, K3_GPIO_Pin);\
-															GPIO_SetBits(K5_GPIO, K5_GPIO_Pin);\
-															StAmpMR = ModeV_Range4;
+									GPIO_ResetBits(K4_GPIO, K4_GPIO_Pin);\
+									GPIO_ResetBits(K6_GPIO, K6_GPIO_Pin);\
+									GPIO_SetBits(K3_GPIO, K3_GPIO_Pin);\
+									GPIO_SetBits(K5_GPIO, K5_GPIO_Pin);\
+									StAmpMR = ModeV_Range4;
 
 #define ST_AMP_V_RANGE5				GPIO_ResetBits(K5_GPIO, K5_GPIO_Pin);\
-															GPIO_ResetBits(K6_GPIO, K6_GPIO_Pin);\
-															GPIO_SetBits(K2_GPIO, K2_GPIO_Pin);\
-															GPIO_SetBits(K3_GPIO, K3_GPIO_Pin);\
-															GPIO_SetBits(K4_GPIO, K4_GPIO_Pin);\
-															StAmpMR = ModeV_Range5;
+									GPIO_ResetBits(K6_GPIO, K6_GPIO_Pin);\
+									GPIO_SetBits(K2_GPIO, K2_GPIO_Pin);\
+									GPIO_SetBits(K3_GPIO, K3_GPIO_Pin);\
+									GPIO_SetBits(K4_GPIO, K4_GPIO_Pin);\
+									StAmpMR = ModeV_Range5;
 
 #define ST_AMP_V_RANGE6				GPIO_ResetBits(K2_GPIO, K2_GPIO_Pin);\
-															GPIO_ResetBits(K5_GPIO, K5_GPIO_Pin);\
-															GPIO_ResetBits(K6_GPIO, K6_GPIO_Pin);\
-															GPIO_SetBits(K3_GPIO, K3_GPIO_Pin);\
-															GPIO_SetBits(K4_GPIO, K4_GPIO_Pin);\
-															StAmpMR = ModeV_Range6;
+									GPIO_ResetBits(K5_GPIO, K5_GPIO_Pin);\
+									GPIO_ResetBits(K6_GPIO, K6_GPIO_Pin);\
+									GPIO_SetBits(K3_GPIO, K3_GPIO_Pin);\
+									GPIO_SetBits(K4_GPIO, K4_GPIO_Pin);\
+									StAmpMR = ModeV_Range6;
 
 #define ST_AMP_V_RANGE7				GPIO_ResetBits(K5_GPIO, K5_GPIO_Pin);\
-															GPIO_SetBits(K2_GPIO, K2_GPIO_Pin);\
-															GPIO_SetBits(K3_GPIO, K3_GPIO_Pin);\
-															GPIO_SetBits(K4_GPIO, K4_GPIO_Pin);\
-															GPIO_SetBits(K6_GPIO, K6_GPIO_Pin);\
-															StAmpMR = ModeV_Range7;
+									GPIO_SetBits(K2_GPIO, K2_GPIO_Pin);\
+									GPIO_SetBits(K3_GPIO, K3_GPIO_Pin);\
+									GPIO_SetBits(K4_GPIO, K4_GPIO_Pin);\
+									GPIO_SetBits(K6_GPIO, K6_GPIO_Pin);\
+									StAmpMR = ModeV_Range7;
 
 #define ST_AMP_V_RANGE8				GPIO_ResetBits(K2_GPIO, K2_GPIO_Pin);\
-															GPIO_ResetBits(K5_GPIO, K5_GPIO_Pin);\
-															GPIO_SetBits(K3_GPIO, K3_GPIO_Pin);\
-															GPIO_SetBits(K4_GPIO, K4_GPIO_Pin);\
-															GPIO_SetBits(K6_GPIO, K6_GPIO_Pin);\
-															StAmpMR = ModeV_Range8;
+									GPIO_ResetBits(K5_GPIO, K5_GPIO_Pin);\
+									GPIO_SetBits(K3_GPIO, K3_GPIO_Pin);\
+									GPIO_SetBits(K4_GPIO, K4_GPIO_Pin);\
+									GPIO_SetBits(K6_GPIO, K6_GPIO_Pin);\
+									StAmpMR = ModeV_Range8;
 /*
-#define ST_AMP_NULL						GPIO_ResetBits(K1_GPIO, K1_GPIO_Pin);\
-															GPIO_ResetBits(K2_GPIO, K2_GPIO_Pin);\
-															GPIO_ResetBits(K3_GPIO, K3_GPIO_Pin);\
-															GPIO_ResetBits(K4_GPIO, K4_GPIO_Pin);\
-															GPIO_ResetBits(K5_GPIO, K5_GPIO_Pin);\
-															GPIO_ResetBits(K6_GPIO, K6_GPIO_Pin);
+#define ST_AMP_NULL					GPIO_ResetBits(K1_GPIO, K1_GPIO_Pin);\
+									GPIO_ResetBits(K2_GPIO, K2_GPIO_Pin);\
+									GPIO_ResetBits(K3_GPIO, K3_GPIO_Pin);\
+									GPIO_ResetBits(K4_GPIO, K4_GPIO_Pin);\
+									GPIO_ResetBits(K5_GPIO, K5_GPIO_Pin);\
+									GPIO_ResetBits(K6_GPIO, K6_GPIO_Pin);
 */
 
 
@@ -202,6 +202,9 @@ void RCC_init(void);
 
 // -- GPIOs init ---------------------------------------
 void GPIO_init(void);
+
+// -- DAC init -----------------------------------------
+void DAC_init(void);
 
 // -- Timer2 init --------------------------------------
 //void TIM2_init(void);

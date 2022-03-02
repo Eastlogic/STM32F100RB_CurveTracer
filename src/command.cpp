@@ -139,27 +139,35 @@ switch (Command)
 						case ModeV_Range8: 	ST_AMP_V_RANGE8; 	break;
 						}
 					
-					// Successfull feedback message here...
-
-					}
-					else			// If received unknown parameter
-					{
-					// "Unknown parameter" feedback  message here
-
-					}
+						// Successfull feedback message here...
+						Tx_Dat_raw[1] = CMD_STAMP_MODE_RANGE;
+				}
+				else 		// If received unknown parameter
+				{
+						// "Unknown parameter" feedback  message here
+						Tx_Dat_raw[1] = CMD_ERR;
+				}
 		break;
 		}
 
+		// *****************************************************************
+		// Step Amplifier set out signal
+		case CMD_STAMP_SET_OUT:	
+		{
 
+
+
+
+		break;
+		}
 
 
 		
 /*   -------- Ответ - Команда не выполнена, ошибка обмена --------------------------- */
 		
-		case CMD_ERR: 										// Обработка ошибки обмена
-    {
+		case CMD_ERR: 				// Обработка ошибки обмена
+		{
 		Tx_Dat_raw[1] = CMD_ERR;
-
 		break;
 		}
 						
@@ -171,16 +179,43 @@ switch (Command)
 switch (Command)
 {		// Короткие ответы на короткие команды
 		case CMD_LED_ON_OFF:
-		case CMD_STAMP_POL:
-		case CMD_ERR:
-												Tx_Dat_raw[2] = 0x00;														// Число байт данных ответа
-												Tx_Dat_raw[3] = 0x01;
-												Tx_Dat_raw[4] = ERR_NO;													// Байт данных "нет ошибки"
-												Tx_Dat_raw[5] = CRC_8_Arr(Tx_Dat_raw, 5);				// Последний байт - CRC
-												length = Array_to_wake(Tx_Dat_raw, 6, Tx_Dat);  // Длина сформированного массива
-												Array_to_USART1(Tx_Dat, length);								// Отправка ответа	
+		case CMD_STAMP_POL:	
+
+							Tx_Dat_raw[2] = 0x00;														// Число байт данных ответа
+							Tx_Dat_raw[3] = 0x01;
+							Tx_Dat_raw[4] = ERR_NO;													// Байт данных "нет ошибки"
+							Tx_Dat_raw[5] = CRC_8_Arr(Tx_Dat_raw, 5);				// Последний байт - CRC
+							length = Array_to_wake(Tx_Dat_raw, 6, Tx_Dat);  // Длина сформированного массива
+							Array_to_USART1(Tx_Dat, length);								// Отправка ответа	
 
 		break;
+		
+		case CMD_STAMP_MODE_RANGE:
+
+							Tx_Dat_raw[2] = 0x00;														// Число байт данных ответа
+							Tx_Dat_raw[3] = 0x01;
+							
+							if (Tx_Dat_raw[1] == CMD_STAMP_MODE_RANGE)
+							{Tx_Dat_raw[4] = ERR_NO;}
+
+							if (Tx_Dat_raw[1] == CMD_ERR)
+							{Tx_Dat_raw[4] = ERR_PA;}
+
+							Tx_Dat_raw[5] = CRC_8_Arr(Tx_Dat_raw, 5);				// Последний байт - CRC
+							length = Array_to_wake(Tx_Dat_raw, 6, Tx_Dat);  // Длина сформированного массива
+							Array_to_USART1(Tx_Dat, length);
+		break;
+
+		case CMD_ERR:
+		
+							Tx_Dat_raw[2] = 0x00;														// Число байт данных ответа
+							Tx_Dat_raw[3] = 0x01;
+							Tx_Dat_raw[4] = ERR_TX;													// Байт данных "нет ошибки"
+							Tx_Dat_raw[5] = CRC_8_Arr(Tx_Dat_raw, 5);				// Последний байт - CRC
+							length = Array_to_wake(Tx_Dat_raw, 6, Tx_Dat);  // Длина сформированного массива
+							Array_to_USART1(Tx_Dat, length);								// Отправка ответа	
+		break;
+
 }
 
 

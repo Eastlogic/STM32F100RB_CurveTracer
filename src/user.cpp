@@ -55,7 +55,8 @@ GPIO_InitStruct.GPIO_Pin = K6_GPIO_Pin;
 GPIO_Init(K6_GPIO, &GPIO_InitStruct);
 
 // Default Step Amp state
-ST_AMP_V_RANGE1;
+ST_AMP_POSITIVE;
+ST_AMP_I_RANGE1;
 	
 /* Configure USART1_Tx as alternate function push-pull */
 GPIO_InitStruct.GPIO_Pin = GPIO_Pin_9;
@@ -78,6 +79,35 @@ GPIO_InitStruct.GPIO_Pin = Led2_PIN;
 GPIO_Init(Led2_GPIO, &GPIO_InitStruct);
 }
 // *****************************************************************************
+
+
+// -- DAC init -----------------------------------------------------------------
+
+void DAC_init(void)
+{
+DAC_InitTypeDef  DAC_struct;
+
+DAC_struct.DAC_Trigger = DAC_Trigger_None;
+DAC_struct.DAC_WaveGeneration = DAC_WaveGeneration_None;
+DAC_struct.DAC_OutputBuffer = DAC_OutputBuffer_Disable;
+DAC_Init(DAC_Channel_1, &DAC_struct);
+
+DAC_Cmd(DAC_Channel_1, ENABLE);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -137,8 +167,8 @@ USART_Cmd(USART1, ENABLE);
 
 void USART1_Transmit(char data)
 {
-  while(!(USART1->SR & USART_SR_TC)); //Проверка завершения передачи предыдущих данных
-  USART1->DR = data; 				  				//Передача данных
+  while(!(USART1->SR & USART_SR_TC)); 		//Проверка завершения передачи предыдущих данных
+  USART1->DR = data; 				  		//Передача данных
 }
 
 
@@ -157,31 +187,6 @@ void USART1_SendData(char* data)
 
 
 
-//#define FARR_SIZE 16
-
-// Array for float to keep float value in ASCII
-//char f_arr[FARR_SIZE];
-
-// Float-to-array conversion with formating for 
-// UART output array[]={..., CR, LF}
-// Result - CR, LF terminated string, 
-// null-symbol added for end of string detection
-/*
-char* FloatToUartFormat(float f)
-{
-int n;
-
-n = snprintf(f_arr, FARR_SIZE-3, "%+.5f", f);
-f_arr[n++] = '\r';	// Add CR
-f_arr[n++] = '\n';  // Add LF
-f_arr[n]   = '\0';
-
-return f_arr;
-}
-*/
-
-
-
 
 // -- ADC1 init ----------------------------------------------------------------
 void ADC1_init(void)
@@ -194,19 +199,19 @@ ADC_Init_struct.ADC_ContinuousConvMode = ENABLE;
 ADC_Init_struct.ADC_ExternalTrigConv = ADC_ExternalTrigConv_None;
 ADC_Init_struct.ADC_DataAlign = ADC_DataAlign_Right;
 ADC_Init_struct.ADC_NbrOfChannel = ADC_CH_NUMB;			// Число каналов в последовательности преобразования
-ADC_Init(ADC1, &ADC_Init_struct); 									// Initialise ADC1
+ADC_Init(ADC1, &ADC_Init_struct); 						// Initialise ADC1
 
 //Порядок оцифровки
 ADC_RegularChannelConfig(ADC1, ADC_Channel_14, 1, ADC_SampleTime);
 
-ADC_Cmd(ADC1, ENABLE);														// Enable ADC1
+ADC_Cmd(ADC1, ENABLE);									// Enable ADC1
 
 //Калибровка ADC1
-ADC_ResetCalibration(ADC1);												// Enable ADC1 reset calibaration register
+ADC_ResetCalibration(ADC1);								// Enable ADC1 reset calibaration register
 while (ADC_GetResetCalibrationStatus(ADC1));			// Check the end of ADC1 reset calibration register
 
-ADC_StartCalibration(ADC1);												// Start ADC1 calibration
-while (ADC_GetCalibrationStatus(ADC1));						// Check the end of ADC1 calibration
+ADC_StartCalibration(ADC1);								// Start ADC1 calibration
+while (ADC_GetCalibrationStatus(ADC1));					// Check the end of ADC1 calibration
 
 ADC_SoftwareStartConvCmd(ADC1, ENABLE);
 
