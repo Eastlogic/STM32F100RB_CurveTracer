@@ -18,41 +18,6 @@ int i;
 		}
 }
 
-/* 
-	Функция посылки "сырых" данных в формате протокола WAKE
-
- 	Параметры: 		CMD	  - поле комманды в посылке
-								N	  - число пересылаемых байт в посылке (число байт массива Data)
-								*Data - указатель первого элемента пересылаемых байт
-	Возвращаемое
-	значение:		нет
-
-*/
-
-char Raw_Arr[FRAME_OUT+16];
-char Send_Arr[2*(FRAME_OUT+16)];
-
-void Send_WAKE_pckg(unsigned char CMD, unsigned int N, char* Data)
-{
-
-unsigned int j;
-
-Raw_Arr[0] = FEND;
-Raw_Arr[1] = CMD;
-Raw_Arr[2] = (unsigned char)(N>>8);
-Raw_Arr[3] = (unsigned char)N;
-
-for (j=0; j<N; j++)
-{
-Raw_Arr[j+4] = Data[j];
-}
-
-Raw_Arr[j+4] = CRC_8_Arr(Raw_Arr, (j+4));	// Дополнение последним байтом - CRC
-
-j = Array_to_wake(Raw_Arr, (j+5), Send_Arr);
-
-Array_to_USART1(Send_Arr, j);
-}
 
 
 //------------------------------- Переменные: --------------------------------
@@ -65,6 +30,8 @@ char Tx_Dat[2*FRAME_OUT];						// Обработанный фрейм к отправке
 
 extern char Command;								// Код команды на выполнение
 extern StAmpModeRange StAmpMR;			// Step Amp режим Mode/Range
+
+uint16_t	StAmpDACOut;							// Step Amp output value
 
 
 // -- Функция разбора выполняемых команд -------------------------------------
@@ -83,7 +50,8 @@ switch (Command)
 		// Link Echo - возврат пришедших данных
 		case CMD_LINK_ECHO:	
 		{		
-				Send_WAKE_pckg(CMD_LINK_ECHO, Rx_Nbt, Rx_Dat);			
+				//Send_WAKE_pckg(CMD_LINK_ECHO, Rx_Nbt, Rx_Dat);
+				Tx_Dat_raw[1] = CMD_LINK_ECHO;		// Возврат команды запроса				
 				break;
 		}
 
@@ -139,13 +107,13 @@ switch (Command)
 						case ModeV_Range8: 	ST_AMP_V_RANGE8; 	break;
 						}
 					
-						// Successfull feedback message here...
-						Tx_Dat_raw[1] = CMD_STAMP_MODE_RANGE;
+				// Successfull feedback message here...
+				Tx_Dat_raw[1] = CMD_STAMP_MODE_RANGE;
 				}
 				else 		// If received unknown parameter
 				{
-						// "Unknown parameter" feedback  message here
-						Tx_Dat_raw[1] = CMD_ERR;
+				// "Unknown parameter" feedback  message here
+				Tx_Dat_raw[1] = CMD_ERR;
 				}
 		break;
 		}
@@ -155,12 +123,23 @@ switch (Command)
 		case CMD_STAMP_SET_OUT:	
 		{
 
-
-
+				StAmpDACOut = (Rx_Dat[0]<<8) | Rx_Dat[1];
+		
+				if (StAmpDACOut <= 0xFFF)					// If valid value received
+				{
+				DAC_SetChannel1Data(DAC_Align_12b_R, StAmpDACOut);
+				
+				// Successfull feedback message here...
+				Tx_Dat_raw[1] = CMD_STAMP_SET_OUT;
+				}
+				else
+				{
+				// "Unknown parameter" feedback  message here
+				Tx_Dat_raw[1] = CMD_ERR;
+				}
 
 		break;
 		}
-
 
 		
 /*   -------- Ответ - Команда не выполнена, ошибка обмена --------------------------- */
@@ -175,56 +154,64 @@ switch (Command)
 }
 
 
-// Отправка ответов с повторяющимся форматом на команды
-switch (Command)
-{		// Короткие ответы на короткие команды
+
+// ********** Отправка ответов на входящие команды **************************
+
+if(CMD_WITH_SHORT_RESPONSE(Command))	// Отправка ответов с коротким форматом
+{
+		Tx_Dat_raw[2] = 0x00;		// Число байт данных ответа
+		Tx_Dat_raw[3] = 0x01;
+
+		switch (Command)
+		{		// Короткие ответы на короткие команды
+
+		case CMD_LINK_ECHO:
+
+							Tx_Dat_raw[4] = Rx_Dat[0];											// Байт данных "нет ошибки"
+							Tx_Dat_raw[5] = CRC_8_Arr(Tx_Dat_raw, 5);				// Последний байт - CRC
+		break;
+
 		case CMD_LED_ON_OFF:
 		case CMD_STAMP_POL:	
 
-							Tx_Dat_raw[2] = 0x00;														// Число байт данных ответа
-							Tx_Dat_raw[3] = 0x01;
 							Tx_Dat_raw[4] = ERR_NO;													// Байт данных "нет ошибки"
 							Tx_Dat_raw[5] = CRC_8_Arr(Tx_Dat_raw, 5);				// Последний байт - CRC
-							length = Array_to_wake(Tx_Dat_raw, 6, Tx_Dat);  // Длина сформированного массива
-							Array_to_USART1(Tx_Dat, length);								// Отправка ответа	
-
 		break;
 		
 		case CMD_STAMP_MODE_RANGE:
-
-							Tx_Dat_raw[2] = 0x00;														// Число байт данных ответа
-							Tx_Dat_raw[3] = 0x01;
-							
-							if (Tx_Dat_raw[1] == CMD_STAMP_MODE_RANGE)
+		case CMD_STAMP_SET_OUT:
+					
+							if ((Tx_Dat_raw[1] == CMD_STAMP_MODE_RANGE) || (Tx_Dat_raw[1] == CMD_STAMP_SET_OUT))
 							{Tx_Dat_raw[4] = ERR_NO;}
 
 							if (Tx_Dat_raw[1] == CMD_ERR)
 							{Tx_Dat_raw[4] = ERR_PA;}
 
 							Tx_Dat_raw[5] = CRC_8_Arr(Tx_Dat_raw, 5);				// Последний байт - CRC
-							length = Array_to_wake(Tx_Dat_raw, 6, Tx_Dat);  // Длина сформированного массива
-							Array_to_USART1(Tx_Dat, length);
 		break;
 
 		case CMD_ERR:
 		
-							Tx_Dat_raw[2] = 0x00;														// Число байт данных ответа
-							Tx_Dat_raw[3] = 0x01;
 							Tx_Dat_raw[4] = ERR_TX;													// Байт данных "нет ошибки"
 							Tx_Dat_raw[5] = CRC_8_Arr(Tx_Dat_raw, 5);				// Последний байт - CRC
-							length = Array_to_wake(Tx_Dat_raw, 6, Tx_Dat);  // Длина сформированного массива
-							Array_to_USART1(Tx_Dat, length);								// Отправка ответа	
 		break;
 
+		}
+
+		length = Array_to_wake(Tx_Dat_raw, 6, Tx_Dat);  // Длина сформированного массива
+		Array_to_USART1(Tx_Dat, length);								// Отправка ответа	
+}
+else												// Отправка ответов с длинным форматом
+{
+
 }
 
 
 
-
-
-Command = CMD_NOP;	// Команда обработана, сброс выполняемой команды
+Command = CMD_NOP;	// Команда обработана, сброс обработанной команды
 USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);
-}
+}		
+// end of CMD_exec()
 
 
 

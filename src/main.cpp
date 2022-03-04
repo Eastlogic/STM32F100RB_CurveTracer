@@ -14,6 +14,7 @@ int main(void)
 {
 RCC_init();
 GPIO_init();
+DAC_init();
 
 //TIM2_init();	
 USART1_init();
